@@ -9,7 +9,6 @@ steps:
     organization: 'usach-devops-2023'
     projectKey: 'Usach-DevOps-2023_springpet-clinic'
     projectName: 'springpet-clinic'
-    scannerMode: 'Other'
   displayName: 'SonarCloud Prepare'
 
 - task: Gradle@3
