@@ -3,6 +3,22 @@ pool:
 
 steps:
 
-- script: |
-    echo Hola Mundo DevOps
-  displayName: 'Build'
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'usach-devops-2023'
+    projectKey: 'Usach-DevOps-2023_springpet-clinic'
+    projectName: 'springpet-clinic'
+    scannerMode: 'Other'
+  displayName: 'SonarCloud Prepare'
+
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'sonar'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '3.5.0.2730'
+    spotBugsAnalysis: false
