@@ -13,3 +13,21 @@ steps:
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
   displayName: Build
+  
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker'
+    command: 'login'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker'
+    repository: 'rcortesz/devops-2023'
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'Docker'
+    repository: 'rcortesz/devops-2023'
+    command: 'push'
