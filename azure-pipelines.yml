@@ -13,6 +13,25 @@ steps:
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
   displayName: Build
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'SonarCloud'
+    organization: 'usach-devops-2023'
+    projectKey: 'Usach-DevOps-2023_springpet-clinic'
+    projectName: 'springpet-clinic'
+  displayName: 'SonarCloud Prepare'
+
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'sonarqube'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '3.3'
+    spotBugsAnalysis: false
   
 - task: Docker@2
   inputs:
