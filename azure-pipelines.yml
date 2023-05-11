@@ -3,21 +3,13 @@ pool:
 
 steps:
 
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: 'usach-devops-2023'
-    projectKey: 'Usach-DevOps-2023_springpet-clinic'
-    projectName: 'springpet-clinic'
-  displayName: 'SonarCloud Prepare'
-
 - task: Gradle@3
   inputs:
     gradleWrapperFile: 'gradlew'
-    tasks: 'sonarqube'
-    publishJUnitResults: false
+    tasks: 'build'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: true
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '3.3'
+    sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
+  displayName: Build
